@@ -15,12 +15,12 @@ function toggleAutoBadge(value) {
 }
 
 /* Retrieve values from local storage and restore options when shown */
-chrome.storage.local.get({ origin: "cn", target: "hk", auto: false }, (items) => {
-  $originSelect.value = items.origin;
-  $targetSelect.value = items.target;
-  $autoCheckbox.checked = items.auto;
-  $convertButton.disabled = items.origin === items.target;
-  toggleAutoBadge(items.auto);
+chrome.storage.local.get({ origin: "cn", target: "hk", auto: false }, (settings) => {
+  $originSelect.value = settings.origin;
+  $targetSelect.value = settings.target;
+  $autoCheckbox.checked = settings.auto;
+  $convertButton.disabled = settings.origin === settings.target;
+  toggleAutoBadge(settings.auto);
 });
 
 /* User changes origin option */
@@ -45,17 +45,15 @@ $swapButton.addEventListener("click", () => {
 
 /* User checks auto convert */
 $autoCheckbox.addEventListener("change", (event) => {
-  toggleAutoBadge(event.currentTarget.checked);
   chrome.storage.local.set({ auto: event.currentTarget.checked });
+  toggleAutoBadge(event.currentTarget.checked);
 });
 
 /* User clicks convert button */
 $convertButton.addEventListener("click", () => {
-  const request = { origin: $originSelect.value, target: $targetSelect.value };
-  if (request.origin === request.target) return;
   $convertButton.disabled = true;
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, request, (response) => {
+    chrome.tabs.sendMessage(tabs[0].id, { action: "click" }, (response) => {
       $convertButton.disabled = false;
       if (response !== undefined) $footer.innerText = `${response.i} nodes changed in ${response.time}ms`;
       else $footer.innerHTML = `<span style="color: red;">page protected by browser</span>`;
