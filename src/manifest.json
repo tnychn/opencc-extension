@@ -8,12 +8,8 @@
   "icons": {
     "128": "icon.png"
   },
-  "browser_action": {
-    "default_icon": {
-      "128": "icon.png"
-    },
-    "default_title": "OpenCC",
-    "default_popup": "popup.html"
+  "background": {
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
@@ -22,5 +18,12 @@
       "matches": ["<all_urls>"]
     }
   ],
-  "permissions": ["storage", "tabs"]
+  "browser_action": {
+    "default_icon": {
+      "128": "icon.png"
+    },
+    "default_title": "OpenCC",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage", "tabs", "contextMenus"]
 }
