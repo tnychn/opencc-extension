@@ -3,8 +3,10 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     title: "Convert",
     contexts: ["selection"],
-    onclick: () => {
-      // TODO: send message to content script to trigger conversion
+    onclick: (info) => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "select", text: info.selectionText });
+      });
     },
   });
 });
