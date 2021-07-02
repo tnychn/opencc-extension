@@ -6,15 +6,16 @@ function convertAllTextNodes(origin, target) {
   const convert = Converter({ from: origin, to: target });
   const iterateTextNodes = (node, callback) => {
     const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
-    for (var textNode, i = 0; (textNode = walker.nextNode()); callback(textNode) && i++);
-    return i;
+    for (let textNode; (textNode = walker.nextNode()); ) callback(textNode);
   };
-  return iterateTextNodes(document.body, (textNode) => {
+  let count = 0;
+  iterateTextNodes(document.body, (textNode) => {
     const originalText = textNode.nodeValue;
     const convertedText = convert(originalText);
     if (convertedText === originalText) return;
-    return (textNode.nodeValue = convertedText);
+    (textNode.nodeValue = convertedText) && count++;
   });
+  return count;
 }
 
 /* Mount trigger to auto convert when DOM changes */
@@ -32,8 +33,8 @@ chrome.runtime.onMessage.addListener(({ action }, _, sendResponse) => {
   chrome.storage.local.get(defaultSettings, (settings) => {
     if (action === "click") {
       const start = Date.now();
-      const i = convertAllTextNodes(settings.origin, settings.target);
-      sendResponse({ i, time: Date.now() - start });
+      const count = convertAllTextNodes(settings.origin, settings.target);
+      sendResponse({ count, time: Date.now() - start });
     }
   });
   return true; // eliminate error: 'the message port closed before a response was received'

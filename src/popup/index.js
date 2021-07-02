@@ -55,7 +55,7 @@ $convertButton.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, { action: "click" }, (response) => {
       $convertButton.disabled = false;
-      if (response !== undefined) $footer.innerText = `${response.i} nodes changed in ${response.time}ms`;
+      if (response !== undefined) $footer.innerText = `${response.count} nodes changed in ${response.time}ms`;
       else $footer.innerHTML = `<span style="color: red;">page protected by browser</span>`;
     });
   });
