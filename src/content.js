@@ -2,22 +2,19 @@ import { Converter } from "opencc-js";
 
 const defaultSettings = { origin: "cn", target: "hk", auto: false };
 
-function iterateTextNodes(node, callback) {
-  const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
-  for (let n; (n = walker.nextNode()); ) callback(n);
-}
-
 function convertAllTextNodes(origin, target) {
-  let i = 0;
   const convert = Converter({ from: origin, to: target });
-  iterateTextNodes(document.body, (childNode) => {
-    const originalText = childNode.nodeValue;
+  const iterateTextNodes = (node, callback) => {
+    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
+    for (var textNode, i = 0; (textNode = walker.nextNode()); callback(textNode) && i++);
+    return i;
+  };
+  return iterateTextNodes(document.body, (textNode) => {
+    const originalText = textNode.nodeValue;
     const convertedText = convert(originalText);
     if (convertedText === originalText) return;
-    childNode.nodeValue = convertedText;
-    i++;
+    return (textNode.nodeValue = convertedText);
   });
-  return i;
 }
 
 /* Mount trigger to auto convert when DOM changes */
