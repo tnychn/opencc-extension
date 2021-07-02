@@ -2,7 +2,7 @@
 
 <p align="center"><img src="./1.gif" width="50%" /></p>
 
-A browser extension that converts all text in the current active tab between different Chinese variants.
+A browser extension that converts text in the current active tab between different Chinese variants.
 
 > This extension is powered by [opencc-js](https://github.com/nk2028/opencc-js),
 > which is a JavaScript API wrapper based on the great [OpenCC](https://github.com/BYVoid/OpenCC) project.
@@ -23,6 +23,8 @@ Other browsers may also work but are not guaranteed to.
 
 - Minimalist user interface.
 - Fast performance (using [`TreeWalker`](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker)).
+- Converts whole text on a webpage with one click.
+- Converts selected text in right click [context menu](#context-menu).
 - Converts dynamically rendered text in [auto mode](#auto-mode)
   (using [`MutationObserver`](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)).
 - Other features of OpenCC.
@@ -63,6 +65,14 @@ Specify the language settings in the extension popup.
 
 - **Origin**: the original Chinese text variant in the webpage
 - **Target**: the desired Chinese text variant to be converted into
+
+### Context Menu
+
+<p align="center"><img src="./3.gif" width="40%" /></p>
+
+You can convert selected text (rather than the whole text) on the webpage using the context menu item.
+
+This function uses the language settings specified in the extension popup.
 
 ### Auto Mode
 
