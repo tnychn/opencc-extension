@@ -68,7 +68,7 @@ Specify the language settings in the extension popup.
 
 ### Context Menu
 
-<p align="center"><img src="./3.gif" width="40%" /></p>
+<p align="center"><img src="./2.gif" width="40%" /></p>
 
 You can convert selected text (rather than the whole text) on the webpage using the context menu item.
 
@@ -76,7 +76,7 @@ This function uses the language settings specified in the extension popup.
 
 ### Auto Mode
 
-<p align="center"><img src="./2.gif" width="40%" /></p>
+<p align="center"><img src="./3.gif" width="40%" /></p>
 
 When auto mode is enabled, a grey badge with the letter `A` appears on the corner of the extension icon.
 
