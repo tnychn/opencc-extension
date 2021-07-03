@@ -1,6 +1,6 @@
 <h1 align="center">opencc-extension</h1>
 
-<p align="center"><img src="./1.gif" width="50%" /></p>
+<p align="center"><img src="./demo.gif" width="50%" /></p>
 
 A browser extension that converts text in the current active tab between different Chinese variants.
 
@@ -24,14 +24,17 @@ Other browsers may also work but are not guaranteed to.
 - Minimalist user interface.
 - Fast performance (using [`TreeWalker`](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker)).
 - Converts whole text on a webpage with one click.
-- Converts selected text in right click [context menu](#context-menu).
-- Converts dynamically rendered text in [auto mode](#auto-mode)
-  (using [`MutationObserver`](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)).
+  - Can also convert dynamically rendered text in auto mode
+    (using [`MutationObserver`](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)).
+- Converts selected text on a webpage in right click context menu.
+- Converts any text provided in the text box in real time.
 - Other features of OpenCC.
   - 嚴格區分「一簡對多繁」和「一簡對多異」。
   - 完全兼容異體字，可以實現動態替換。
   - 嚴格審校一簡對多繁詞條，原則爲「能分則不合」。
   - 支持中國大陸、臺灣、香港異體字和地區習慣用詞轉換，如「裏」「裡」、「鼠標」「滑鼠」。
+
+See [usage](#usage) for more ways to convert text.
 
 ## Installation
 
@@ -66,17 +69,16 @@ Specify the language settings in the extension popup.
 - **Origin**: the original Chinese text variant in the webpage
 - **Target**: the desired Chinese text variant to be converted into
 
-### Context Menu
+<p align="center">
+  <img src="./demo.gif" width="40%" />
+  <img src="./auto.gif" width="40%" />
+</p>
 
-<p align="center"><img src="./2.gif" width="40%" /></p>
-
-You can convert selected text (rather than the whole text) on the webpage using the context menu item.
-
-This function uses the language settings specified in the extension popup.
-
-### Auto Mode
-
-<p align="center"><img src="./3.gif" width="40%" /></p>
+<p align="center">
+  <sub><strong>Left:</strong> One Click</sub>
+  <br>
+  <sub><strong>Right:</strong> Auto Mode</sub>
+</p>
 
 When auto mode is enabled, a grey badge with the letter `A` appears on the corner of the extension icon.
 
@@ -84,6 +86,17 @@ All text in the webpage of the current active tab is converted whenever it loads
 
 > **NOTE:** For performance reason, auto mode will not convert text on webpages which
 > explicitly specify their `lang` attributes to be languages other than `zh` in their HTML documents.
+
+<p align="center">
+  <img src="./select.gif" width="40%" />
+  <img src="./textbox.gif" width="30%" />
+</p>
+
+<p align="center">
+  <sub><strong>Left:</strong> Convert Text Selection on Webpage</sub>
+  <br>
+  <sub><strong>Right:</strong> Convert Any Text in Text Box</sub>
+</p>
 
 ## Credit
 
