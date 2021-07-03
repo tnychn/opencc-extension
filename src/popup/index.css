@@ -42,19 +42,6 @@ main {
   margin-top: 0.5em;
 }
 
-main > div:first-child {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-main > div:last-child {
-  margin-top: 0.25em;
-  display: flex;
-  justify-content: stretch;
-  align-items: center;
-}
-
 select {
   padding: 0.25em;
   border: 1px solid grey;
@@ -65,6 +52,37 @@ select {
   flex-grow: 1;
   margin-left: 0.25em;
   margin-right: 0.25em;
+}
+
+main > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main > div:nth-child(2) {
+  margin-top: 0.25em;
+  display: flex;
+  flex-direction: column;
+}
+
+main > div:nth-child(2) > span {
+  font-size: small;
+  font-weight: bold;
+}
+
+#textbox {
+  height: 5em;
+  min-width: 100%;
+  font-size: small;
+  font-family: inherit;
+}
+
+main > div:last-child {
+  margin-top: 0.25em;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
 }
 
 #convert {
