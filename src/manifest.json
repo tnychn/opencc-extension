@@ -25,5 +25,10 @@
     "default_title": "OpenCC",
     "default_popup": "popup.html"
   },
-  "permissions": ["storage", "tabs", "contextMenus"]
+  "permissions": ["storage", "tabs", "contextMenus"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "opencc.extension@tnychn"
+    }
+  }
 }

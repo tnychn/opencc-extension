@@ -45,10 +45,7 @@ module.exports = (_, argv) => {
     { from: path.resolve(__dirname, "./src/manifest.json") },
     { from: path.resolve(__dirname, "./src/assets/icon.png") },
   ];
-  if (argv.mode === "production") {
-    patterns.push({ from: path.resolve(__dirname, "./README.md") });
-    patterns.push({ from: path.resolve(__dirname, "./LICENSE.txt") });
-  }
+  argv.mode === "production" && patterns.push({ from: path.resolve(__dirname, "./LICENSE.txt") });
   config.plugins.push(new CopyWebpackPlugin({ patterns }));
   return { ...config, devtool: argv.mode === "production" ? false : "source-map" };
 };

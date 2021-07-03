@@ -10,12 +10,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "build:run": "web-ext run -s ./build",
+    "build:prod": "webpack --config webpack.config.js --mode production",
     "build:watch": "webpack --config webpack.config.js --mode development --watch",
-    "start:firefox": "concurrently \"yarn build:watch\" \"wait-on ./build/manifest.json && yarn build:run --start-url about:debugging\"",
-    "start:chromium": "concurrently \"yarn build:watch\" \"wait-on ./build/manifest.json && yarn build:run -t chromium\"",
-    "build": "webpack --config webpack.config.js --mode production",
-    "zip": "yarn build --output-path ./opencc && cd ./opencc && zip -r ../opencc.zip * && cd .. && rm -r ./opencc"
+    "run:build": "web-ext run -s ./build",
+    "start:firefox": "concurrently \"yarn build:watch\" \"wait-on ./build/manifest.json && yarn run:build\"",
+    "start:chromium": "concurrently \"yarn build:watch\" \"wait-on ./build/manifest.json && yarn run:build -t chromium\"",
+    "build": "yarn build:prod --output-path ./opencc && web-ext build -s ./opencc -a . && rm -r ./opencc"
   },
   "dependencies": {
     "opencc-js": "^1.0.3"
