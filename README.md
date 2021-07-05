@@ -1,6 +1,19 @@
+<p align="center">
+  <img src="./src/assets/icon.png" width="64px" />
+</p>
+
 <h1 align="center">opencc-extension</h1>
 
 <p align="center"><img src="./demo.gif" width="50%" /></p>
+
+<p align="center">
+  <a href="#installation">
+    <img src="https://img.shields.io/badge/Chrome-black.svg?&style=for-the-badge&logo=google-chrome" />
+  </a>
+  <a href="https://addons.mozilla.org/firefox/addon/opencc">
+    <img src="https://img.shields.io/badge/Firefox-202340.svg?&style=for-the-badge&logo=firefox-browser" />
+  </a>
+</p>
 
 A browser extension that converts text in the current active tab between different Chinese variants.
 
@@ -16,8 +29,8 @@ Most of the variants supported by OpenCC are supported:
 - ~~`t`: Traditional Chinese (OpenCC standard)~~
 - ~~`jp`: Japanese Shinjitai~~
 
-Only Chrome and Firefox are tested.
-Other browsers may also work but are not guaranteed to.
+> Only Chrome and Firefox are tested.
+> Other browsers may also work but are not guaranteed to.
 
 ## Features
 
@@ -38,8 +51,11 @@ See [usage](#usage) for more ways to convert text.
 
 ## Installation
 
-> This extension will soon be available on
-> [Chrome Web Store](https://chrome.google.com/webstore) and [Firefox Add-ons](https://addons.mozilla.org).
+<a href="https://addons.mozilla.org/firefox/addon/opencc">
+  <img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" />
+</a>
+
+> This extension will soon be available on [Chrome Web Store](https://chrome.google.com/webstore).
 
 ### Manually
 
