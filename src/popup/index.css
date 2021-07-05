@@ -72,8 +72,11 @@ main > div:nth-child(2) > span {
 }
 
 #textbox {
-  height: 5em;
   min-width: 100%;
+  max-width: 500px;
+  min-height: 100px;
+  max-height: 300px;
+  padding: 0.25em;
   font-size: small;
   font-family: inherit;
 }

@@ -27,13 +27,28 @@ function textboxConvert() {
 }
 
 /* Retrieve values from local storage and restore options when shown */
-chrome.storage.local.get({ origin: "cn", target: "hk", auto: false }, (settings) => {
-  $originSelect.value = settings.origin;
-  $targetSelect.value = settings.target;
-  $autoCheckbox.checked = settings.auto;
-  $convertButton.disabled = settings.origin === settings.target;
-  toggleAutoBadge(settings.auto);
-});
+chrome.storage.local.get(
+  {
+    origin: "cn",
+    target: "hk",
+    auto: false,
+    textboxSize: {
+      width: null,
+      height: null,
+    },
+  },
+  (settings) => {
+    $originSelect.value = settings.origin;
+    $targetSelect.value = settings.target;
+    $autoCheckbox.checked = settings.auto;
+    $convertButton.disabled = settings.origin === settings.target;
+    toggleAutoBadge(settings.auto);
+    // restore textbox size
+    const { width, height } = settings.textboxSize;
+    $textbox.style.width = width ? `${width}px` : "";
+    $textbox.style.height = height ? `${height}px` : "";
+  }
+);
 
 /* User changes origin option */
 $originSelect.addEventListener("change", (event) => {
@@ -65,6 +80,16 @@ $textbox.addEventListener("input", () => {
   if (timeout) clearTimeout(timeout);
   timeout = setTimeout(textboxConvert, 750);
 });
+
+/* User resizes textbox */
+new ResizeObserver(() => {
+  chrome.storage.local.set({
+    textboxSize: {
+      width: $textbox.offsetWidth,
+      height: $textbox.offsetHeight,
+    },
+  });
+}).observe($textbox);
 
 /* User clicks convert button */
 $convertButton.addEventListener("click", () => {
