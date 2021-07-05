@@ -5,6 +5,7 @@ import { Converter } from "opencc-js";
 const $originSelect = document.getElementById("origin");
 const $targetSelect = document.getElementById("target");
 const $swapButton = document.getElementById("swap");
+const $resetButton = document.getElementById("reset");
 const $textbox = document.getElementById("textbox");
 const $convertButton = document.getElementById("convert");
 const $autoCheckbox = document.getElementById("auto");
@@ -79,6 +80,12 @@ $textbox.addEventListener("input", () => {
   // debounce 750ms: wait for typing to stop
   if (timeout) clearTimeout(timeout);
   timeout = setTimeout(textboxConvert, 750);
+});
+
+/* User clicks reset button */
+$resetButton.addEventListener("click", () => {
+  $textbox.value = ""; // clear input
+  $textbox.style.width = $textbox.style.height = ""; // reset size
 });
 
 /* User resizes textbox */

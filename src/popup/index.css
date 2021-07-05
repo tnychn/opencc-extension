@@ -71,6 +71,13 @@ main > div:nth-child(2) > span {
   font-weight: bold;
 }
 
+#reset {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+}
+
 #textbox {
   min-width: 100%;
   max-width: 500px;
