@@ -2,6 +2,11 @@ import { Converter } from "opencc-js";
 
 const defaultSettings = { origin: "cn", target: "hk", auto: false };
 
+function convertTitle(origin, target) {
+  const convert = Converter({ from: origin, to: target });
+  document.title = convert(document.title);
+}
+
 function convertAllTextNodes(origin, target) {
   const convert = Converter({ from: origin, to: target });
   const iterateTextNodes = (node, callback) => {
@@ -40,18 +45,25 @@ function convertSelectedTextNodes(origin, target) {
 }
 
 /* Mount trigger to auto convert when DOM changes */
+let currentURL = "";
 const lang = document.documentElement.lang;
 if (!lang || lang.startsWith("zh"))
   new MutationObserver(() => {
     chrome.storage.local.get(defaultSettings, (settings) => {
       if (!settings.auto || settings.origin === settings.target) return;
+      if (currentURL !== window.location.href) {
+        currentURL = window.location.href;
+        convertTitle(settings.origin, settings.target);
+      }
       convertAllTextNodes(settings.origin, settings.target);
     });
   }).observe(document.body, { childList: true, subtree: true });
 
 /* Run convert once DOM ready when in auto mode */
 chrome.storage.local.get(defaultSettings, (settings) => {
-  if (settings.auto) convertAllTextNodes(settings.origin, settings.target);
+  if (!settings.auto) return;
+  convertTitle(settings.origin, settings.target);
+  convertAllTextNodes(settings.origin, settings.target);
 });
 
 /* Run convert on all nodes when triggered by button click in popup */
@@ -60,6 +72,7 @@ chrome.runtime.onMessage.addListener(({ action }, _, sendResponse) => {
     if (settings.origin !== settings.target) {
       if (action === "click") {
         const start = Date.now();
+        convertTitle(settings.origin, settings.target);
         const count = convertAllTextNodes(settings.origin, settings.target);
         sendResponse({ count, time: Date.now() - start });
       } else if (action === "select") convertSelectedTextNodes(settings.origin, settings.target);
