@@ -13,9 +13,11 @@
     "build:prod": "webpack --config webpack.config.js --mode production",
     "build:watch": "webpack --config webpack.config.js --mode development --watch",
     "run:build": "web-ext run -s ./build",
-    "start:firefox": "concurrently \"yarn build:watch\" \"wait-on ./build/manifest.json && yarn run:build\"",
-    "start:chromium": "concurrently \"yarn build:watch\" \"wait-on ./build/manifest.json && yarn run:build -t chromium\"",
-    "build": "yarn build:prod --output-path ./opencc && web-ext build -s ./opencc -a . && rm -r ./opencc"
+    "start:firefox": "concurrently \"yarn build:watch --env BROWSER='firefox'\" \"wait-on ./build/manifest.json && yarn run:build\"",
+    "start:chromium": "concurrently \"yarn build:watch --env BROWSER='chrome'\" \"wait-on ./build/manifest.json && yarn run:build -t chromium\"",
+    "dist:chrome": "yarn build:prod --env BROWSER=\"chrome\" --output-path ./dist/chrome && web-ext build -s ./dist/chrome -a . -n opencc.chrome.zip",
+    "dist:firefox": "yarn build:prod --env BROWSER=\"firefox\" --output-path ./dist/firefox && web-ext build -s ./dist/firefox -a . -n opencc.firefox.zip",
+    "dist": "yarn dist:chrome && yarn dist:firefox && rm -rf ./dist"
   },
   "dependencies": {
     "opencc-js": "^1.0.3"

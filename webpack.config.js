@@ -40,11 +40,18 @@ const config = {
   ],
 };
 
-module.exports = (_, argv) => {
-  const patterns = [
-    { from: path.resolve(__dirname, "./src/manifest.json") },
-    { from: path.resolve(__dirname, "./src/assets/icon.png") },
-  ];
+module.exports = (env, argv) => {
+  const patterns = [{ from: path.resolve(__dirname, "./src/assets/icon.png") }];
+  env.BROWSER === "chrome" &&
+    patterns.push({
+      from: path.resolve(__dirname, "./src/manifest.chrome.json"),
+      to: "manifest.json",
+    });
+  env.BROWSER === "firefox" &&
+    patterns.push({
+      from: path.resolve(__dirname, "./src/manifest.firefox.json"),
+      to: "manifest.json",
+    });
   argv.mode === "production" && patterns.push({ from: path.resolve(__dirname, "./LICENSE.txt") });
   config.plugins.push(new CopyWebpackPlugin({ patterns }));
   return { ...config, devtool: argv.mode === "production" ? false : "source-map" };
