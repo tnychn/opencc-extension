@@ -25,6 +25,7 @@
     "@babel/eslint-parser": "^7.14.7",
     "@babel/preset-env": "^7.14.7",
     "@types/chrome": "^0.0.164",
+    "@types/opencc-js": "^1.0.0",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.2.0",
     "copy-webpack-plugin": "^10.0.0",
