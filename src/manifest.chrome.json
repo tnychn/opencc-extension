@@ -23,7 +23,7 @@
       "128": "icon.png"
     },
     "default_title": "OpenCC",
-    "default_popup": "popup.html"
+    "default_popup": "popup/index.html"
   },
   "permissions": ["storage", "tabs", "contextMenus"]
 }

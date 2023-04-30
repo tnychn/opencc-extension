@@ -1,5 +1,3 @@
-import "./index.css"; // include stylesheet in build process
-
 import { Converter } from "opencc-js";
 
 const $originSelect = document.getElementById("origin");

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./src/assets/icon.png" width="64px" />
+  <img src="./icon.png" width="64px" />
 </p>
 
 <h1 align="center">opencc-extension</h1>
@@ -57,23 +57,6 @@ See [usage](#usage) for more ways to convert text.
 
 > This extension will soon be available on [Chrome Web Store](https://chrome.google.com/webstore).
 
-### Manually
-
-1. Download [`opencc.zip`]() from [releases](https://github.com/tnychn/opencc-extension/releases/latest).
-2. Extract the zip file.
-3. Load the extension in broswer:
-
-**Chrome**
-
-4. Navigate to [`chrome://extensions`](chrome://extensions).
-5. Enable developer mode.
-6. Load unpacked from the extracted folder.
-
-**Firefox**
-
-4. Navigate to [`about:debugging`](about:debugging) (This Firefox).
-5. Load temporary add-on from the `manifest.json` file in the extracted folder.
-
 ## Usage
 
 Specify the language settings in the extension popup.
@@ -124,5 +107,5 @@ All text in the webpage of the current active tab is converted whenever it loads
 <p align="center">
   <sub><strong>Made with ♥︎ by tnychn</strong></sub>
   <br>
-  <sub><strong>MIT © 2021 Tony Chan</strong></sub>
+  <sub><strong>MIT © 2023 Tony Chan</strong></sub>
 </p>
