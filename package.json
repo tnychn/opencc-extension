@@ -20,7 +20,7 @@
     "dist": "concurrently \"yarn dist:chrome\" \"yarn dist:firefox\" && rm -rf ./dist"
   },
   "dependencies": {
-    "opencc-js": "^1.0.3"
+    "opencc-js": "^1.0.5"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.164",
