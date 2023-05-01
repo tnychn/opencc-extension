@@ -2486,10 +2486,10 @@ open@7.4.2:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
-opencc-js@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/opencc-js/-/opencc-js-1.0.3.tgz#9a02f768b373afee6e5bad87c4bc43b73e91069b"
-  integrity sha512-WaifP9DpNc199fvEqmQtSjxmiQxYB5nqO8NgE7N3CkER+hP8I8o2caiNrEUs1RUvVfSlph/3qWwymYt5hmiQbg==
+opencc-js@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/opencc-js/-/opencc-js-1.0.5.tgz#4754a9407590c5d581c9b4788acd43e8627dd464"
+  integrity sha512-LD+1SoNnZdlRwtYTjnQdFrSVCAaYpuDqL5CkmOaHOkKoKh7mFxUicLTRVNLU5C+Jmi1vXQ3QL4jWdgSaa4sKjg==
 
 optionator@^0.9.1:
   version "0.9.1"
