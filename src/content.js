@@ -44,7 +44,7 @@ function convertSelectedTextNodes(origin, target) {
   range.deleteContents() || range.insertNode(contents);
 }
 
-/* Mount trigger to auto convert when DOM changes */
+/* Mount trigger to auto convert when DOM changes. */
 let currentURL = "";
 const lang = document.documentElement.lang;
 if (!lang || lang.startsWith("zh"))
@@ -59,14 +59,14 @@ if (!lang || lang.startsWith("zh"))
     });
   }).observe(document.body, { childList: true, subtree: true });
 
-/* Run convert once DOM ready when in auto mode */
+/* Run convert once DOM ready when in auto mode. */
 chrome.storage.local.get(defaultSettings, (settings) => {
   if (!settings.auto) return;
   convertTitle(settings.origin, settings.target);
   convertAllTextNodes(settings.origin, settings.target);
 });
 
-/* Run convert on all nodes when triggered by button click in popup */
+/* Run convert on all nodes when triggered by button click in popup. */
 chrome.runtime.onMessage.addListener(({ action }, _, sendResponse) => {
   chrome.storage.local.get(defaultSettings, (settings) => {
     if (settings.origin !== settings.target) {
