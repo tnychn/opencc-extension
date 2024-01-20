@@ -24,15 +24,14 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.164",
-    "@types/opencc-js": "^1.0.0",
-    "concurrently": "^6.2.0",
-    "esbuild": "^0.17.18",
-    "eslint": "^8.2.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.0.5",
-    "wait-on": "^6.0.0",
-    "web-ext": "^6.2.0"
+    "@types/opencc-js": "^1.0.3",
+    "concurrently": "^6.5.1",
+    "esbuild": "^0.17.19",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^8.10.0",
+    "prettier": "^2.8.8",
+    "wait-on": "^6.0.1",
+    "web-ext": "^6.8.0"
   },
   "prettier": {
     "tabWidth": 2,
@@ -48,12 +47,9 @@
       "ecmaVersion": "latest",
       "sourceType": "module"
     },
-    "plugins": [
-      "prettier"
-    ],
     "extends": [
       "eslint:recommended",
-      "plugin:prettier/recommended"
+      "prettier"
     ]
   }
 }
