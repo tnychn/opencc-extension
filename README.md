@@ -17,8 +17,8 @@
 
 A browser extension that converts text in the current active tab between different Chinese variants.
 
-> This extension is powered by [opencc-js](https://github.com/nk2028/opencc-js),
-> which is a JavaScript API wrapper based on the great [OpenCC](https://github.com/BYVoid/OpenCC) project.
+This extension is powered by [opencc-js](https://github.com/nk2028/opencc-js),
+which is a JavaScript API wrapper around the great [OpenCC](https://github.com/BYVoid/OpenCC) project.
 
 Most of the variants supported by OpenCC are supported:
 
@@ -29,6 +29,7 @@ Most of the variants supported by OpenCC are supported:
 - ~~`t`: Traditional Chinese (OpenCC standard)~~
 - ~~`jp`: Japanese Shinjitai~~
 
+> [!NOTE]
 > Only Chrome and Firefox are tested.
 > Other browsers may also work but are not guaranteed to.
 
@@ -55,7 +56,7 @@ See [usage](#usage) for more ways to convert text.
   <img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" />
 </a>
 
-> This extension will soon be available on [Chrome Web Store](https://chrome.google.com/webstore).
+This extension will soon be available on [Chrome Web Store](https://chrome.google.com/webstore).
 
 ## Usage
 
@@ -83,7 +84,8 @@ When auto mode is enabled, a grey badge with the letter `A` appears on the corne
 
 All text in the webpage of the current active tab is converted whenever it loads or is updated.
 
-> **NOTE:** For performance reason, auto mode will not convert text on webpages which
+> [!NOTE]
+> For performance reason, auto mode will not convert text on webpages which
 > explicitly specify their `lang` attributes to be languages other than `zh` in their HTML documents.
 
 <p align="center">
@@ -97,15 +99,15 @@ All text in the webpage of the current active tab is converted whenever it loads
   <sub><strong>Right:</strong> Convert Any Text in Text Box</sub>
 </p>
 
-## Credit
+## Credits
 
-- OpenCC: https://github.com/BYVoid/OpenCC
-- opencc-js: https://github.com/nk2028/opencc-js
+- https://github.com/BYVoid/OpenCC
+- https://github.com/nk2028/opencc-js
 
 ---
 
 <p align="center">
-  <sub><strong>Made with ♥︎ by tnychn</strong></sub>
+  <sub><strong>~ crafted with ♥︎ by tnychn ~</strong></sub>
   <br>
-  <sub><strong>MIT © 2023 Tony Chan</strong></sub>
+  <sub><strong>MIT © 2024 Tony Chan</strong></sub>
 </p>
