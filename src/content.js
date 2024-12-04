@@ -1,6 +1,8 @@
 import { Converter } from "opencc-js";
 
-const defaultSettings = { origin: "cn", target: "hk", auto: false };
+const defaultSettings = { origin: "cn", target: "hk", auto: false, whitelist: [] };
+
+const matchWhitelist = (whitelist, url) => whitelist.map((p) => new RegExp(p)).some((re) => re.test(url));
 
 function convertTitle(origin, target) {
   const convert = Converter({ from: origin, to: target });
@@ -51,6 +53,7 @@ if (!lang || lang.startsWith("zh"))
   new MutationObserver(async () => {
     const settings = await chrome.storage.local.get(defaultSettings);
     if (!settings.auto || settings.origin === settings.target) return;
+    if (matchWhitelist(settings.whitelist, window.location.href)) return;
     if (currentURL !== window.location.href) {
       currentURL = window.location.href;
       convertTitle(settings.origin, settings.target);
@@ -61,6 +64,7 @@ if (!lang || lang.startsWith("zh"))
 /* Run convert once DOM ready when in auto mode. */
 chrome.storage.local.get(defaultSettings).then((settings) => {
   if (!settings.auto) return;
+  if (matchWhitelist(settings.whitelist, window.location.href)) return;
   convertTitle(settings.origin, settings.target);
   convertAllTextNodes(settings.origin, settings.target);
 });

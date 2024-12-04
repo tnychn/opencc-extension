@@ -19,6 +19,10 @@
       "run_at": "document_idle"
     }
   ],
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": false
+  },
   "action": {
     "default_icon": {
       "128": "icon.png"

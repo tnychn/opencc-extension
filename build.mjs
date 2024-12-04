@@ -15,6 +15,9 @@ const options = {
     "./src/popup/index.js",
     "./src/popup/index.html",
     "./src/popup/index.css",
+    "./src/options/index.js",
+    "./src/options/index.html",
+    "./src/options/index.css",
     {
       in: `./src/manifest.${browser}.json`,
       out: "manifest",

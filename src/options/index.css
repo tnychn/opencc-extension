@@ -1,0 +1,37 @@
+* {
+  user-select: none;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+}
+
+body {
+  padding: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+label {
+  font-weight: bold;
+  font-size: large;
+}
+
+p {
+  margin: 0;
+  font-size: small;
+}
+
+textarea {
+  min-height: 10em;
+  min-width: 100%;
+  max-width: 100%;
+}
