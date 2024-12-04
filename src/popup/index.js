@@ -91,11 +91,10 @@ new ResizeObserver(() => {
 $convertButton.addEventListener("click", async () => {
   $convertButton.disabled = true;
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-  chrome.tabs.sendMessage(tabs[0].id, { action: "click" }, (response) => {
-    $convertButton.disabled = false;
-    if (response !== undefined) $footer.innerText = `${response.count} nodes changed in ${response.time}ms`;
-    else $footer.innerHTML = `<span style="color: red; font-weight: bold;">BROWSER PROTECTED PAGE</span>`;
-  });
+  const response = await chrome.tabs.sendMessage(tabs[0].id, { action: "click" });
+  $convertButton.disabled = false;
+  if (response !== undefined) $footer.innerText = `${response.count} nodes changed in ${response.time}ms`;
+  else $footer.innerHTML = `<span style="color: red; font-weight: bold;">BROWSER PROTECTED PAGE</span>`;
 });
 
 /* User checks auto convert mode. */

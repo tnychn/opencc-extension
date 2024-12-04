@@ -48,27 +48,28 @@ function convertSelectedTextNodes(origin, target) {
 let currentURL = "";
 const lang = document.documentElement.lang;
 if (!lang || lang.startsWith("zh"))
-  new MutationObserver(() => {
-    chrome.storage.local.get(defaultSettings, (settings) => {
-      if (!settings.auto || settings.origin === settings.target) return;
-      if (currentURL !== window.location.href) {
-        currentURL = window.location.href;
-        convertTitle(settings.origin, settings.target);
-      }
-      convertAllTextNodes(settings.origin, settings.target);
-    });
+  new MutationObserver(async () => {
+    const settings = await chrome.storage.local.get(defaultSettings);
+    if (!settings.auto || settings.origin === settings.target) return;
+    if (currentURL !== window.location.href) {
+      currentURL = window.location.href;
+      convertTitle(settings.origin, settings.target);
+    }
+    convertAllTextNodes(settings.origin, settings.target);
   }).observe(document.body, { childList: true, subtree: true });
 
 /* Run convert once DOM ready when in auto mode. */
-chrome.storage.local.get(defaultSettings, (settings) => {
+chrome.storage.local.get(defaultSettings).then((settings) => {
   if (!settings.auto) return;
   convertTitle(settings.origin, settings.target);
   convertAllTextNodes(settings.origin, settings.target);
 });
 
 /* Run convert on all nodes when triggered by button click in popup. */
+// NOTE: listener itself cannot be async function, see https://stackoverflow.com/questions/48107746.
 chrome.runtime.onMessage.addListener(({ action }, _, sendResponse) => {
-  chrome.storage.local.get(defaultSettings, (settings) => {
+  (async () => {
+    const settings = await chrome.storage.local.get(defaultSettings);
     if (settings.origin !== settings.target) {
       if (action === "click") {
         const start = Date.now();
@@ -77,6 +78,6 @@ chrome.runtime.onMessage.addListener(({ action }, _, sendResponse) => {
         sendResponse({ count, time: Date.now() - start });
       } else if (action === "select") convertSelectedTextNodes(settings.origin, settings.target);
     }
-  });
+  })();
   return true; // eliminate error: 'the message port closed before a response was received'
 });
