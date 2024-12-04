@@ -5,7 +5,8 @@
 import * as esbuild from "esbuild";
 
 const arg = process.argv[2];
-const env = process.env.NODE_ENV;
+const mode = process.env.MODE;
+const browser = process.env.BROWSER;
 
 const options = {
   entryPoints: [
@@ -15,7 +16,7 @@ const options = {
     "./src/popup/index.html",
     "./src/popup/index.css",
     {
-      in: `./src/manifest.${process.env.BROWSER}.json`,
+      in: `./src/manifest.${browser}.json`,
       out: "manifest",
     },
     {
@@ -34,8 +35,8 @@ const options = {
   target: "es6",
   bundle: true,
   allowOverwrite: true,
-  minify: env === "production",
-  sourcemap: env === "development",
+  minify: mode === "production",
+  sourcemap: mode === "development",
 };
 
 if (arg === "watch") {

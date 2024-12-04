@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "OpenCC",
   "author": "Tony Chan",
   "version": "0.3.3",
@@ -8,22 +8,31 @@
   "icons": {
     "128": "icon.png"
   },
-  "background": {
-    "scripts": ["background.js"]
-  },
   "content_scripts": [
     {
-      "js": ["content.js"],
-      "run_at": "document_idle",
-      "matches": ["<all_urls>"]
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
     }
   ],
-  "browser_action": {
+  "action": {
     "default_icon": {
       "128": "icon.png"
     },
     "default_title": "OpenCC",
     "default_popup": "popup/index.html"
   },
-  "permissions": ["storage", "tabs", "contextMenus"]
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus"
+  ]
 }

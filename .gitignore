@@ -3,3 +3,4 @@
 build/
 node_modules
 node_modules.nosync/
+web-ext-config.mjs

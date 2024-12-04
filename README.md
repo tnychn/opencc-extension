@@ -70,6 +70,17 @@ Specify the language settings in the extension popup.
 - **Target**: the desired Chinese text variant to be converted into
 
 <p align="center">
+  <img src="./select.gif" width="40%" />
+  <img src="./textbox.gif" width="30%" />
+</p>
+
+<p align="center">
+  <sub><strong>Left:</strong> Convert Text Selection on Webpage</sub>
+  <br>
+  <sub><strong>Right:</strong> Convert Any Text in Text Box</sub>
+</p>
+
+<p align="center">
   <img src="./demo.gif" width="40%" />
   <img src="./auto.gif" width="40%" />
 </p>

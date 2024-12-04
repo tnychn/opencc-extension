@@ -8,30 +8,31 @@
     "email": "tnychn@protonmail.com",
     "url": "https://github.com/tnychn"
   },
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "build": "./build.mjs",
-    "build:watch": "yarn build watch",
+    "build:watch": "pnpm build watch",
     "start": "web-ext run -s ./build",
-    "start:firefox": "concurrently \"NODE_ENV='development' BROWSER='firefox' yarn build:watch\" \"wait-on ./build/manifest.json && yarn start\"",
-    "start:chromium": "concurrently \"NODE_ENV='development' BROWSER='chrome' yarn build:watch\" \"wait-on ./build/manifest.json && yarn start -t chromium\"",
-    "dist:chrome": "NODE_ENV='production' BROWSER='chrome' yarn build ./dist/chrome && web-ext build -s ./dist/chrome -a . -n opencc.chrome.zip",
-    "dist:firefox": "NODE_ENV='production' BROWSER='firefox' yarn build ./dist/firefox && web-ext build -s ./dist/firefox -a . -n opencc.firefox.zip",
-    "dist": "concurrently \"yarn dist:chrome\" \"yarn dist:firefox\" && rm -rf ./dist"
+    "start:firefox": "concurrently \"MODE='development' BROWSER='firefox' pnpm build:watch\" \"wait-on ./build/manifest.json && pnpm start\"",
+    "start:chromium": "concurrently \"MODE='development' BROWSER='chrome' pnpm build:watch\" \"wait-on ./build/manifest.json && pnpm start -t chromium\"",
+    "dist:chrome": "MODE='production' BROWSER='chrome' pnpm build ./dist/chrome && web-ext build -s ./dist/chrome -a . -n opencc.chrome.zip",
+    "dist:firefox": "MODE='production' BROWSER='firefox' pnpm build ./dist/firefox && web-ext build -s ./dist/firefox -a . -n opencc.firefox.zip",
+    "dist": "concurrently \"pnpm dist:chrome\" \"pnpm dist:firefox\" && rm -rf ./dist"
   },
   "dependencies": {
     "opencc-js": "^1.0.5"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.164",
+    "@types/chrome": "^0.0.287",
     "@types/opencc-js": "^1.0.3",
-    "concurrently": "^6.5.1",
-    "esbuild": "^0.17.19",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^8.10.0",
-    "prettier": "^2.8.8",
-    "wait-on": "^6.0.1",
-    "web-ext": "^6.8.0"
+    "concurrently": "^9.1.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.1",
+    "wait-on": "^8.0.1",
+    "web-ext": "^8.3.0"
   },
   "prettier": {
     "tabWidth": 2,

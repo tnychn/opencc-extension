@@ -19,8 +19,8 @@ function textboxConvert() {
 }
 
 /* Retrieve values from local storage and restore options when shown. */
-chrome.storage.local.get(
-  {
+chrome.storage.local
+  .get({
     origin: "cn",
     target: "hk",
     auto: false,
@@ -28,8 +28,8 @@ chrome.storage.local.get(
       width: null,
       height: null,
     },
-  },
-  (settings) => {
+  })
+  .then((settings) => {
     $originSelect.value = settings.origin;
     $targetSelect.value = settings.target;
     $autoCheckbox.checked = settings.auto;
@@ -38,8 +38,7 @@ chrome.storage.local.get(
     const { width, height } = settings.textboxSize;
     $textbox.style.width = width ? `${width}px` : "";
     $textbox.style.height = height ? `${height}px` : "";
-  }
-);
+  });
 
 /* User changes origin option. */
 $originSelect.addEventListener("change", (event) => {
@@ -89,14 +88,13 @@ new ResizeObserver(() => {
 }).observe($textbox);
 
 /* User clicks convert button. */
-$convertButton.addEventListener("click", () => {
+$convertButton.addEventListener("click", async () => {
   $convertButton.disabled = true;
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "click" }, (response) => {
-      $convertButton.disabled = false;
-      if (response !== undefined) $footer.innerText = `${response.count} nodes changed in ${response.time}ms`;
-      else $footer.innerHTML = `<span style="color: red; font-weight: bold;">BROWSER PROTECTED PAGE</span>`;
-    });
+  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.tabs.sendMessage(tabs[0].id, { action: "click" }, (response) => {
+    $convertButton.disabled = false;
+    if (response !== undefined) $footer.innerText = `${response.count} nodes changed in ${response.time}ms`;
+    else $footer.innerHTML = `<span style="color: red; font-weight: bold;">BROWSER PROTECTED PAGE</span>`;
   });
 });
 
@@ -104,5 +102,5 @@ $convertButton.addEventListener("click", () => {
 $autoCheckbox.addEventListener("change", (event) => {
   const auto = event.currentTarget.checked;
   chrome.storage.local.set({ auto });
-  chrome.runtime.getBackgroundPage((window) => window.toggleAutoBadge(auto));
+  chrome.action.setBadgeText({ text: auto ? "A" : "" });
 });
