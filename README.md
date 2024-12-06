@@ -83,24 +83,13 @@ Specify the language settings in the extension popup.
   <sub><strong>Right:</strong> Auto Mode</sub>
 </p>
 
-When auto mode is enabled, a grey badge with the letter `A` appears on the corner of the extension icon.
-
-All text in the webpage of the current active tab is converted whenever it loads or is updated.
-
 > [!NOTE]
 > For performance reason, auto mode will not convert text on webpages which
 > explicitly specify their `lang` attributes to be languages other than `zh` in their HTML documents.
 
-<p align="center">
-  <img src="./select.gif" width="40%" />
-  <img src="./textbox.gif" width="30%" />
-</p>
+When auto mode is enabled, a grey badge with the letter `A` appears on the corner of the extension icon.
 
-<p align="center">
-  <sub><strong>Left:</strong> Convert Text Selection on Webpage</sub>
-  <br>
-  <sub><strong>Right:</strong> Convert Any Text in Text Box</sub>
-</p>
+All text in the webpage of the current active tab is converted whenever it loads or is updated.
 
 ## Credits
 
