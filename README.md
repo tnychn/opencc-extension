@@ -7,11 +7,11 @@
 <p align="center"><img src="./demo.gif" width="50%" /></p>
 
 <p align="center">
-  <a href="#installation">
-    <img src="https://img.shields.io/badge/Chrome-black.svg?&style=for-the-badge&logo=google-chrome" />
+  <a href="https://chromewebstore.google.com/detail/opencc/jmlbcbhpnfpffhniogblmmiklgbopoif">
+    <img src="https://user-images.githubusercontent.com/585534/107280622-91a8ea80-6a26-11eb-8d07-77c548b28665.png">
   </a>
   <a href="https://addons.mozilla.org/firefox/addon/opencc">
-    <img src="https://img.shields.io/badge/Firefox-202340.svg?&style=for-the-badge&logo=firefox-browser" />
+    <img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" />
   </a>
 </p>
 
@@ -49,14 +49,6 @@ Most of the variants supported by OpenCC are supported:
   - 支持中國大陸、臺灣、香港異體字和地區習慣用詞轉換，如「裏」「裡」、「鼠標」「滑鼠」。
 
 See [usage](#usage) for more ways to convert text.
-
-## Installation
-
-<a href="https://addons.mozilla.org/firefox/addon/opencc">
-  <img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" />
-</a>
-
-This extension will soon be available on [Chrome Web Store](https://chrome.google.com/webstore).
 
 ## Usage
 
