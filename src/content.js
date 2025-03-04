@@ -1,15 +1,18 @@
 import { Converter } from "opencc-js";
 
-const defaultSettings = { origin: "cn", target: "hk", auto: false, whitelist: [] };
+const defaultSettings = { origin: "cn", target: "hk", auto: false, once: true, whitelist: [] };
+const zeroWidthSpace = String.fromCharCode(8203);
 
 const matchWhitelist = (whitelist, url) => whitelist.map((p) => new RegExp(p)).some((re) => re.test(url));
 
-function convertTitle(origin, target) {
+function convertTitle({ origin, target, once }) {
   const convert = Converter({ from: origin, to: target });
-  document.title = convert(document.title);
+  let convertedTitle = convert(once ? document.title : document.title.replace(zeroWidthSpace, ""));
+  if (once) convertedTitle = convertedTitle.split("").join(zeroWidthSpace);
+  document.title = convertedTitle;
 }
 
-function convertAllTextNodes(origin, target) {
+function convertAllTextNodes({ origin, target, once }) {
   const convert = Converter({ from: origin, to: target });
   const iterateTextNodes = (node, callback) => {
     const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
@@ -18,14 +21,16 @@ function convertAllTextNodes(origin, target) {
   let count = 0;
   iterateTextNodes(document.body, (textNode) => {
     const originalText = textNode.nodeValue;
-    const convertedText = convert(originalText);
+    if (originalText.trim().length === 0) return;
+    let convertedText = convert(once ? originalText : originalText.replace(zeroWidthSpace, ""));
     if (convertedText === originalText) return;
+    if (once) convertedText = convertedText.split("").join(zeroWidthSpace);
     (textNode.nodeValue = convertedText) && count++;
   });
   return count;
 }
 
-function convertSelectedTextNodes(origin, target) {
+function convertSelectedTextNodes({ origin, target, once }) {
   const convert = Converter({ from: origin, to: target });
   const iterateTextNodes = (nodes, callback) => {
     for (const node of nodes) {
@@ -37,8 +42,10 @@ function convertSelectedTextNodes(origin, target) {
   const contents = range.cloneContents();
   iterateTextNodes([contents], (textNode) => {
     const originalText = textNode.nodeValue;
-    const convertedText = convert(originalText);
+    if (originalText.trim().length === 0) return;
+    let convertedText = convert(once ? originalText : originalText.replace(zeroWidthSpace, ""));
     if (convertedText === originalText) return;
+    if (once) convertedText = convertedText.split("").join(zeroWidthSpace);
     return (textNode.nodeValue = convertedText);
   });
   // FIXME: the DOM structure messes up
@@ -56,17 +63,17 @@ if (!lang || lang.startsWith("zh"))
     if (matchWhitelist(settings.whitelist, window.location.href)) return;
     if (currentURL !== window.location.href) {
       currentURL = window.location.href;
-      convertTitle(settings.origin, settings.target);
+      convertTitle(settings);
     }
-    convertAllTextNodes(settings.origin, settings.target);
+    convertAllTextNodes(settings);
   }).observe(document.body, { childList: true, subtree: true });
 
 /* Run convert once DOM ready when in auto mode. */
 chrome.storage.local.get(defaultSettings).then((settings) => {
   if (!settings.auto) return;
   if (matchWhitelist(settings.whitelist, window.location.href)) return;
-  convertTitle(settings.origin, settings.target);
-  convertAllTextNodes(settings.origin, settings.target);
+  convertTitle(settings);
+  convertAllTextNodes(settings);
 });
 
 /* Run convert on all nodes when triggered by button click in popup. */
@@ -77,10 +84,10 @@ chrome.runtime.onMessage.addListener(({ action }, _, sendResponse) => {
     if (settings.origin !== settings.target) {
       if (action === "click") {
         const start = Date.now();
-        convertTitle(settings.origin, settings.target);
-        const count = convertAllTextNodes(settings.origin, settings.target);
+        convertTitle(settings);
+        const count = convertAllTextNodes(settings);
         sendResponse({ count, time: Date.now() - start });
-      } else if (action === "select") convertSelectedTextNodes(settings.origin, settings.target);
+      } else if (action === "select") convertSelectedTextNodes(settings);
     }
   })();
   return true; // eliminate error: 'the message port closed before a response was received'
