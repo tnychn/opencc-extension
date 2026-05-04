@@ -21,7 +21,7 @@
     "dist": "concurrently \"pnpm dist:chrome\" \"pnpm dist:firefox\" && rm -rf ./dist"
   },
   "dependencies": {
-    "opencc-js": "^1.0.5"
+    "opencc-js": "^1.3.0"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.287",
