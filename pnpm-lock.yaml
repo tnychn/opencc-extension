@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   opencc-js:
-    specifier: ^1.0.5
-    version: 1.0.5
+    specifier: ^1.4.1
+    version: 1.4.1
 
 devDependencies:
   '@types/chrome':
@@ -2083,8 +2083,8 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /opencc-js@1.0.5:
-    resolution: {integrity: sha512-LD+1SoNnZdlRwtYTjnQdFrSVCAaYpuDqL5CkmOaHOkKoKh7mFxUicLTRVNLU5C+Jmi1vXQ3QL4jWdgSaa4sKjg==}
+  /opencc-js@1.4.1:
+    resolution: {integrity: sha512-2lPLcrg7cnh1ATSduOxhnk/jq6KlR6w+5Ihl4wF7Z5e5Rva4vxTyugV5rZ7EiUCOZl+EDOLetIix+BhgYDCC+A==}
     dev: false
 
   /optionator@0.9.4:
